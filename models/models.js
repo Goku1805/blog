@@ -1,17 +1,10 @@
-const { Sequelize } = require('sequelize');
-
+const Sequelize = require('sequelize');
 const sequelize = new Sequelize('blog', 'root', 'root', {
-  
-   dialect: 'mysql'
-  
+  host: 'localhost',
+  dialect: 'mysql',
 });
-
-const user = sequelize.define('user-blog', {
-  id:{
-  	type:Sequelize.INTEGER,
-  	primaryKey: true
-  },
-  description: {
-    type: Sequelize.TEXT
-  }
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Database is connecteed')
 });
+module.exports = sequelize;
